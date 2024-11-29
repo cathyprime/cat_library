@@ -7,6 +7,10 @@
  * Last Edited: 10-11-2024
  */
 
+namespace cat {
+
+// TODO: allow for custom allocator
+
 #ifndef THROWING
 #define NOEXCEPT noexcept
 #define NULL_THROW(alloc) alloc
@@ -18,16 +22,6 @@
 
 #ifndef MEM_ARENA_DEFAULT
 #define MEM_ARENA_DEFAULT 64
-#endif
-
-#ifndef MALLOC
-#include <stdlib.h>
-#define MALLOC(...) malloc(__VA_ARGS__)
-#endif
-
-#ifndef FREE
-#include <stdlib.h>
-#define FREE(...) free(__VA_ARGS__)
 #endif
 
 #ifndef size_t
@@ -82,13 +76,13 @@ class Mem_Arena {
 
   public:
     Mem_Arena() :
-      m_data((char*)MALLOC(m_remaining)),
+      m_data((char*)malloc(m_remaining)),
       m_current(m_data)
     {};
 
     Mem_Arena(size_t size) :
       m_remaining(size),
-      m_data((char*)MALLOC(m_remaining)),
+      m_data((char*)malloc(m_remaining)),
       m_current(m_data)
     {};
 
@@ -104,7 +98,7 @@ class Mem_Arena {
 
     ~Mem_Arena()
     {
-        FREE(m_data);
+        free(m_data);
     }
 };
 
@@ -121,4 +115,4 @@ inline void *operator new(size_t size, Mem_Arena *arena) NOEXCEPT
     return ptr;
 }
 
-#undef size_t
+}

@@ -7,7 +7,7 @@
  * Last Edited: 11-11-2024
  */
 
-#include <functional>
+#include <functional> // TODO: replace with cat equivalent
 
 namespace cat { namespace property {
 

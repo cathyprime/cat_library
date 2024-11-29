@@ -7,6 +7,8 @@
  * Last Edited: 10-11-2024
  */
 
+namespace cat {
+
 typedef unsigned long int size_t;
 
 void* realloc(void* ptr, size_t size);
@@ -219,4 +221,6 @@ inline String operator+(T lhs, U rhs)
     String new_str(lhs);
     new_str.push(rhs);
     return new_str;
+}
+
 }
