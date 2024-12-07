@@ -42,7 +42,7 @@ class Mem_Arena {
 
         metadata_t *meta = (metadata_t*)m_current;
         *meta = {
-            .size= size,
+            .size = size,
             .dtor = [](const void *ptr) {
                 static_cast<const T*>(ptr)->~T();
             }
